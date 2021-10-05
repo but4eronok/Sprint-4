@@ -8,7 +8,7 @@ class NameValidator : Validator<String>() {
     val NAME_VALIDATOR_PATTERN = Pattern.compile("[аА-яЯ]+")
 
     override fun validate(value: String?): List<ErrorCode> {
-        if (value == null) {
+        if (value.isNullOrEmpty()) {
             return listOf(ErrorCode.VALUE_IS_NULL)
         }
 
@@ -45,7 +45,7 @@ class EmailValidator : Validator<String>() {
     val EMAIL_VALIDATOR_PATTERN = Pattern.compile("[aA-zZ]+@[a-z]+.[a-z]+")
 
     override fun validate(value: String?): List<ErrorCode> {
-        if (value == null) {
+        if (value.isNullOrEmpty()) {
             return listOf(ErrorCode.VALUE_IS_NULL)
         }
 

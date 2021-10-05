@@ -74,6 +74,17 @@ class ClientServiceTest {
         assertEquals(exception.errorCode[0], ErrorCode.INCORRECT_SIZE_OF_SNILS)
     }
 
+    @Test
+    fun `fail save clien - first name, second name, e-mail are empty`() {
+        val client = getClientFromJson("/fail/user_empty_issue.json")
+        val exception = assertFailsWith<ValidationException>("Ожидаемая ошибка") {
+            clientService.saveClient(client)
+        }
+        assertEquals(exception.errorCode[0], ErrorCode.VALUE_IS_NULL)
+        assertEquals(exception.errorCode[1], ErrorCode.VALUE_IS_NULL)
+        assertEquals(exception.errorCode[2], ErrorCode.VALUE_IS_NULL)
+    }
+
 
     private fun getClientFromJson(fileName: String): Client = this::class.java.getResource(fileName)
         .takeIf { it != null }
